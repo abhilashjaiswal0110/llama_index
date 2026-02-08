@@ -1,6 +1,7 @@
 """Evaluation Agent Core Implementation"""
 from typing import List, Dict, Any
 import json
+from datetime import datetime
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core.evaluation import FaithfulnessEvaluator, RelevancyEvaluator
 
@@ -117,5 +118,3 @@ class EvaluationAgent:
         
         with open(output_file, 'w') as f:
             f.write(html)
-
-from datetime import datetime
