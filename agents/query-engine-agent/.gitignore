@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.Python
+*.egg-info/
+
+# Environment
+.env
+
+# Index and pipeline data
+index/
+pipeline/
+*.index
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+temp/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
