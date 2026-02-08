@@ -1,48 +1,125 @@
-# Build
+# Build artifacts and dependencies
 .pants.d/
 dist/
+build/
+*.egg
+*.egg-info/
+*.whl
+*.tar.gz
 migration_scripts/
 /uv.lock
 
-# IDEs
-.idea
-.vscode
-.zed
+# IDEs and editors
+.idea/
+.vscode/
+.zed/
 *.code-workspace
-**/.claude
-!/.claude
-/.claude/settings.local.json
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+*.sublime-project
+*.sublime-workspace
+.vs/
 
-# Local development
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Python
 venv/
 .venv/
-.ipynb_checkpoints
-.__pycache__
-__pycache__
+env/
+ENV/
+env.bak/
+venv.bak/
+__pycache__/
+.__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
 dev_notebooks/
 
-# test cruft
+# Environment and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+credentials.json
+token.json
+*.pem
+*.key
+*.crt
+secrets/
+.secrets/
+
+# Application data
+storage/
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.log
+logs/
+*.pid
+tmp/
+temp/
 **/storage/*.json
 **/storage/*.pickle
 
+# Test and coverage
+.coverage
+**/coverage.xml
+.pytest_cache/
+.tox/
+nosetests.xml
+test-results/
+*.cover
 
-# Other
+# Documentation builds
+docs/_build/
+docs/.doctrees/
+site/
+
+# Project-specific
 llamaindex_registry.txt
 packages_to_bump_deduped.txt
-.env
-credentials.json
-token.json
-.python-version
-.DS_Store
-*.sqlite3
-*.db
 llama-index-core/llama_index/core/_static
+.python-version
 
-**/.coverage
-**/coverage.xml
-**/*.egg-info/
+# CI/CD
+.github/workflows/local/
 
-**/*.egg-info/
-**/.coverage
-**/coverage.xml
-\nstorage/
+# Package managers
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
