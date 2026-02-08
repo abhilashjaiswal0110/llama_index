@@ -1,0 +1,54 @@
+# Data Ingestion Agent Configuration
+
+# General Settings
+general:
+  output_dir: "./index"
+  log_level: "INFO"
+  log_file: "ingestion.log"
+
+# Chunking Configuration
+chunking:
+  chunk_size: 1024
+  chunk_overlap: 200
+  strategy: "sentence"  # Options: fixed, sentence, semantic
+  min_chunk_size: 100
+
+# Text Processing
+processing:
+  clean_text: true
+  extract_metadata: true
+  deduplicate: false
+  normalize_whitespace: true
+  remove_special_chars: false
+
+# PDF Settings
+pdf:
+  extract_images: false
+  ocr_enabled: false
+  extract_tables: true
+
+# Web Scraping Settings
+web:
+  depth: 1
+  max_pages: 50
+  timeout: 30
+  user_agent: "LlamaIndex-DataIngestion/1.0"
+  respect_robots_txt: true
+
+# API Settings
+api:
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 5
+  pagination: true
+
+# Database Settings
+database:
+  batch_size: 1000
+  timeout: 300
+
+# Performance
+performance:
+  batch_size: 32
+  num_workers: 4
+  show_progress: true
