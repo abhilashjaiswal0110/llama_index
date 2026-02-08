@@ -8,6 +8,8 @@
 [![Reddit](https://img.shields.io/reddit/subreddit-subscribers/LlamaIndex?style=plastic&logo=reddit&label=r%2FLlamaIndex&labelColor=white)](https://www.reddit.com/r/LlamaIndex/)
 [![Ask AI](https://img.shields.io/badge/Phorm-Ask_AI-%23F2777A.svg?&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNSIgaGVpZ2h0PSI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik00LjQzIDEuODgyYTEuNDQgMS40NCAwIDAgMS0uMDk4LjQyNmMtLjA1LjEyMy0uMTE1LjIzLS4xOTIuMzIyLS4wNzUuMDktLjE2LjE2NS0uMjU1LjIyNmExLjM1MyAxLjM1MyAwIDAgMS0uNTk1LjIxMmMtLjA5OS4wMTItLjE5Mi4wMTQtLjI3OS4wMDZsLTEuNTkzLS4xNHYtLjQwNmgxLjY1OGMuMDkuMDAxLjE3LS4xNjkuMjQ2LS4xOTFhLjYwMy42MDMgMCAwIDAgLjItLjEwNi41MjkuNTI5IDAgMCAwIC4xMzgtLjE3LjY1NC42NTQgMCAwIDAgLjA2NS0uMjRsLjAyOC0uMzJhLjkzLjkzIDAgMCAwLS4wMzYtLjI0OS41NjcuNTY3IDAgMCAwLS4xMDMtLjIuNTAyLjUwMiAwIDAgMC0uMTY4LS4xMzguNjA4LjYwOCAwIDAgMC0uMjQtLjA2N0wyLjQzNy43MjkgMS42MjUuNjcxYS4zMjIuMzIyIDAgMCAwLS4yMzIuMDU4LjM3NS4zNzUgMCAwIDAtLjExNi4yMzJsLS4xMTYgMS40NS0uMDU4LjY5Ny0uMDU4Ljc1NEwuNzA1IDRsLS4zNTctLjA3OUwuNjAyLjkwNkMuNjE3LjcyNi42NjMuNTc0LjczOS40NTRhLjk1OC45NTggMCAwIDEgLjI3NC0uMjg1Ljk3MS45NzEgMCAwIDEgLjMzNy0uMTRjLjExOS0uMDI2LjIyNy0uMDM0LjMyNS0uMDI2TDMuMjMyLjE2Yy4xNTkuMDE0LjMzNi4wMy40NTkuMDgyYTEuMTczIDEuMTczIDAgMCAxIC41NDUuNDQ3Yy4wNi4wOTQuMTA5LjE5Mi4xNDQuMjkzYTEuMzkyIDEuMzkyIDAgMCAxIC4wNzguNThsLS4wMjkuMzJaIiBmaWxsPSIjRjI3NzdBIi8+CiAgPHBhdGggZD0iTTQuMDgyIDIuMDA3YTEuNDU1IDEuNDU1IDAgMCAxLS4wOTguNDI3Yy0uMDUuMTI0LS4xMTQuMjMyLS4xOTIuMzI0YTEuMTMgMS4xMyAwIDAgMS0uMjU0LjIyNyAxLjM1MyAxLjM1MyAwIDAgMS0uNTk1LjIxNGMtLjEuMDEyLS4xOTMuMDE0LS4yOC4wMDZsLTEuNTYtLjEwOC4wMzQtLjQwNi4wMy0uMzQ4IDEuNTU5LjE1NGMuMDkgMCAuMTczLS4wMS4yNDgtLjAzM2EuNjAzLjYwMyAwIDAgMCAuMi0uMTA2LjUzMi41MzIgMCAwIDAgLjEzOS0uMTcyLjY2LjY2IDAgMCAwIC4wNjQtLjI0MWwuMDI5LS4zMjFhLjk0Ljk0IDAgMCAwLS4wMzYtLjI1LjU3LjU3IDAgMCAwLS4xMDMtLjIwMi41MDIuNTAyIDAgMCAwLS4xNjgtLjEzOC42MDUuNjA1IDAgMCAwLS4yNC0uMDY3TDEuMjczLjgyN2MtLjA5NC0uMDA4LS4xNjguMDEtLjIyMS4wNTUtLjA1My4wNDUtLjA4NC4xMTQtLjA5Mi4yMDZMLjcwNSA0IDAgMy45MzhsLjI1NS0yLjkxMUExLjAxIDEuMDEgMCAwIDEgLjM5My41NzIuOTYyLjk2MiAwIDAgMSAuNjY2LjI4NmEuOTcuOTcgMCAwIDEgLjMzOC0uMTRDMS4xMjIuMTIgMS4yMy4xMSAxLjMyOC4xMTlsMS41OTMuMTRjLjE2LjAxNC4zLjA0Ny40MjMuMWExLjE3IDEuMTcgMCAwIDEgLjU0NS40NDhjLjA2MS4wOTUuMTA5LjE5My4xNDQuMjk1YTEuNDA2IDEuNDA2IDAgMCAxIC4wNzcuNTgzbC0uMDI4LjMyMloiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTQuMDgyIDIuMDA3YTEuNDU1IDEuNDU1IDAgMCAxLS4wOTguNDI3Yy0uMDUuMTI0LS4xMTQuMjMyLS4xOTIuMzI0YTEuMTMgMS4xMyAwIDAgMS0uMjU0LjIyNyAxLjM1MyAxLjM1MyAwIDAgMS0uNTk1LjIxNGMtLjEuMDEyLS4xOTMuMDE0LS4yOC4wMDZsLTEuNTYtLjEwOC4wMzQtLjQwNi4wMy0uMzQ4IDEuNTU5LjE1NGMuMDkgMCAuMTczLS4wMS4yNDgtLjAzM2EuNjAzLjYwMyAwIDAgMCAuMi0uMTA2LjUzMi41MzIgMCAwIDAgLjEzOS0uMTcyLjY2LjY2IDAgMCAwIC4wNjQtLjI0MWwuMDI5LS4zMjFhLjk0Ljk0IDAgMCAwLS4wMzYtLjI1LjU3LjU3IDAgMCAwLS4xMDMtLjIwMi41MDIuNTAyIDAgMCAwLS4xNjgtLjEzOC42MDUuNjA1IDAgMCAwLS4yNC0uMDY3TDEuMjczLjgyN2MtLjA5NC0uMDA4LS4xNjguMDEtLjIyMS4wNTUtLjA1My4wNDUtLjA4NC4xMTQtLjA5Mi4yMDZMLjcwNSA0IDAgMy45MzhsLjI1NS0yLjkxMUExLjAxIDEuMDEgMCAwIDEgLjM5My41NzIuOTYyLjk2MiAwIDAgMSAuNjY2LjI4NmEuOTcuOTcgMCAwIDEgLjMzOC0uMTRDMS4xMjIuMTIgMS4yMy4xMSAxLjMyOC4xMTlsMS41OTMuMTRjLjE2LjAxNC4zLjA0Ny40MjMuMWExLjE3IDEuMTcgMCAwIDEgLjU0NS40NDhjLjA2MS4wOTUuMTA5LjE5My4xNDQuMjk1YTEuNDA2IDEuNDA2IDAgMCAxIC4wNzcuNTgzbC0uMDI4LjMyMloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=)](https://www.phorm.ai/query?projectId=c5863b56-6703-4a5d-87b6-7e6031bf16b6)
 
+> **🎯 Enterprise-Ready:** This repository is configured for enterprise use with comprehensive documentation, specialized agents, and best practices.
+
 LlamaIndex (GPT Index) is a data framework for your LLM application. Building with LlamaIndex typically involves working with LlamaIndex core and a chosen set of integrations (or plugins). There are two ways to start building with LlamaIndex in
 Python:
 
@@ -47,6 +49,73 @@ LlamaIndex.TS [(Typescript/Javascript)](https://github.com/run-llama/LlamaIndexT
 [Reddit](https://www.reddit.com/r/LlamaIndex/)
 
 [Discord](https://discord.gg/dGcwcsnxhU)
+
+## 🏢 Enterprise Documentation & Agent Skills
+
+This repository includes comprehensive enterprise-grade documentation and specialized agent skills to accelerate your LlamaIndex development.
+
+### 📚 Enterprise Documentation
+
+Navigate to **[`/docs/enterprise`](./docs/enterprise/)** for comprehensive guides:
+
+- **[Getting Started](./docs/enterprise/GETTING_STARTED.md)** - Complete installation and setup guide
+- **[Local Setup](./docs/enterprise/LOCAL_SETUP.md)** - Professional development environment
+- **[Usage Guide](./docs/enterprise/USAGE_GUIDE.md)** - Core concepts and patterns (30KB, 1,185 lines)
+- **[Examples](./docs/enterprise/EXAMPLES.md)** - Production-ready code examples (46KB, 1,682 lines)
+- **[Architecture](./docs/enterprise/ARCHITECTURE.md)** - System design and scaling (65KB, 1,339 lines)
+- **[Troubleshooting](./docs/enterprise/TROUBLESHOOTING.md)** - Common issues and solutions
+
+**Quick Start:**
+```bash
+# Read the documentation
+cat docs/enterprise/GETTING_STARTED.md
+
+# Follow the setup guide
+cat docs/enterprise/LOCAL_SETUP.md
+```
+
+### 🤖 Specialized Agent Skills
+
+Navigate to **[`/agents`](./agents/)** for production-ready agent implementations:
+
+| Agent | Description | Key Features |
+|-------|-------------|--------------|
+| **[Data Ingestion Agent](./agents/data-ingestion-agent/)** | Multi-source data loading | PDFs, Web, APIs, Databases, 7 modes |
+| **[Query Engine Agent](./agents/query-engine-agent/)** | Advanced querying | Similarity, Hybrid, Sub-question modes |
+| **[RAG Pipeline Agent](./agents/rag-pipeline-agent/)** | End-to-end RAG | Pipeline orchestration, evaluation |
+| **[Indexing Agent](./agents/indexing-agent/)** | Advanced indexing | Multiple index types, optimization |
+| **[Evaluation Agent](./agents/evaluation-agent/)** | RAG evaluation | Quality metrics, A/B testing |
+
+**Quick Start:**
+```bash
+# Install agent dependencies
+cd agents/data-ingestion-agent
+pip install -r requirements.txt
+
+# Run an agent
+python main.py directory --path ./docs --recursive
+
+# See all agents
+cat agents/README.md
+```
+
+**Python API Example:**
+```python
+from agents.data_ingestion_agent.agent import DataIngestionAgent
+from llama_index.core import VectorStoreIndex
+
+# Use the agent
+agent = DataIngestionAgent()
+documents = agent.ingest_directory("./docs")
+index = VectorStoreIndex.from_documents(documents)
+```
+
+**Features:**
+- ✅ Production-ready, enterprise-grade code
+- ✅ CLI and Python API interfaces
+- ✅ Comprehensive error handling and logging
+- ✅ Type hints and documentation
+- ✅ Configuration via YAML and environment variables
 
 ### Ecosystem
 
