@@ -101,7 +101,10 @@ cat agents/README.md
 
 **Python API Example:**
 ```python
-from agents.data_ingestion_agent.agent import DataIngestionAgent
+# Navigate to the agent directory and run
+import sys
+sys.path.append('./agents/data-ingestion-agent')
+from agent import DataIngestionAgent
 from llama_index.core import VectorStoreIndex
 
 # Use the agent

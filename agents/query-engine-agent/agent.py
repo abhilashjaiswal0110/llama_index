@@ -1,9 +1,8 @@
 """Query Engine Agent Core Implementation"""
-from typing import Optional, List
-from pathlib import Path
+from typing import Optional
 from pydantic import BaseModel, Field
 from llama_index.core import VectorStoreIndex, StorageContext, load_index_from_storage
-from llama_index.core.query_engine import SubQuestionQueryEngine, RouterQueryEngine
+from llama_index.core.query_engine import SubQuestionQueryEngine
 from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.core.postprocessor import SimilarityPostprocessor
 

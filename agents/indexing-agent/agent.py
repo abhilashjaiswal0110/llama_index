@@ -32,7 +32,7 @@ class IndexingAgent:
         results = {}
         
         for idx_type in index_types:
-            index = self.create_index(data_dir, idx_type)
+            self.create_index(data_dir, idx_type)
             results[idx_type] = {
                 'retrieval_speed': '100ms',  # Placeholder
                 'memory_usage': '50MB',

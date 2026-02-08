@@ -371,8 +371,8 @@ This documentation is maintained alongside the LlamaIndex project and updated fo
 - Production best practices
 - Performance optimizations
 
-**Last updated:** February 2025
-**LlamaIndex version:** 0.10.x+
+**Last updated:** February 2026
+**LlamaIndex version:** 0.14.x+
 
 ---
 
