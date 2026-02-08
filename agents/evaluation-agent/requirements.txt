@@ -1,0 +1,5 @@
+llama-index>=0.10.0
+llama-index-core>=0.10.0
+click>=8.1.0
+rich>=13.0.0
+bert-score>=0.3.13

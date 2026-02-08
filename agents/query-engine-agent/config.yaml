@@ -1,0 +1,42 @@
+# Query Engine Configuration
+
+query:
+  # Default query mode
+  mode: "similarity"  # Options: similarity, hybrid, sub-question, fusion, tree, router
+  
+  # Retrieval settings
+  top_k: 3
+  similarity_threshold: 0.7
+  
+  # Response settings
+  response_mode: "compact"  # Options: compact, refine, tree_summarize, simple_summarize
+  streaming: false
+  
+  # LLM settings
+  temperature: 0.1
+  max_tokens: 500
+  
+  # Advanced options
+  enable_mmr: false
+  mmr_diversity_bias: 0.3
+  enable_reranking: false
+  
+# Prompt templates
+prompts:
+  system: |
+    You are an expert assistant for question-answering tasks.
+    Use the retrieved context to answer questions accurately.
+    If you don't know the answer, say so.
+  
+  qa_template: |
+    Context: {context}
+    
+    Question: {query}
+    
+    Answer:
+
+# Index settings
+index:
+  path: "./index"
+  cache_enabled: true
+  cache_ttl: 3600  # seconds
