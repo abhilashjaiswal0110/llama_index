@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LlamaIndex Agents - Test UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .status-bar {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .status-badge.online {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.offline {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 600px;
+        }
+        
+        .sidebar {
+            background: #f8f9fa;
+            border-right: 2px solid #e9ecef;
+            padding: 20px;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #495057;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 8px;
+        }
+        
+        .sidebar button {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+        
+        .sidebar button:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+        
+        .sidebar button.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .content-area {
+            padding: 30px;
+        }
+        
+        .agent-section {
+            display: none;
+        }
+        
+        .agent-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #212529;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+        
+        .result-box.show {
+            display: block;
+        }
+        
+        .result-box.error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+        
+        .result-box.success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+        
+        .result-box h4 {
+            margin-bottom: 10px;
+            color: #212529;
+        }
+        
+        .result-box pre {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .card {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+        
+        .card h4 {
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 LlamaIndex Agents</h1>
+            <p>Test and interact with all specialized agents</p>
+        </div>
+        
+        <div class="status-bar">
+            <div>
+                <strong>API Status:</strong>
+                <span class="status-badge online" id="apiStatus">● Online</span>
+            </div>
+            <div>
+                <strong>Version:</strong> 1.0.0
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>Agents</h3>
+                <ul>
+                    <li><button class="agent-btn active" data-agent="health">Health Check</button></li>
+                    <li><button class="agent-btn" data-agent="ingestion">Data Ingestion</button></li>
+                    <li><button class="agent-btn" data-agent="query">Query Engine</button></li>
+                    <li><button class="agent-btn" data-agent="pipeline">RAG Pipeline</button></li>
+                    <li><button class="agent-btn" data-agent="indexing">Indexing</button></li>
+                    <li><button class="agent-btn" data-agent="evaluation">Evaluation</button></li>
+                </ul>
+            </div>
+            
+            <div class="content-area">
+                <!-- Health Check Section -->
+                <div id="health-section" class="agent-section active">
+                    <h2 class="section-title">Health Check</h2>
+                    <p>Check the status of all agents and API endpoints</p>
+                    
+                    <button class="btn btn-primary" onclick="checkHealth()">Check Health</button>
+                    
+                    <div id="health-result" class="result-box"></div>
+                </div>
+                
+                <!-- Data Ingestion Section -->
+                <div id="ingestion-section" class="agent-section">
+                    <h2 class="section-title">Data Ingestion Agent</h2>
+                    
+                    <div class="form-group">
+                        <label>Source Type:</label>
+                        <select id="ingest-type">
+                            <option value="directory">Directory</option>
+                            <option value="pdf">PDF</option>
+                            <option value="web">Web</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Source Path/URL:</label>
+                        <input type="text" id="ingest-path" placeholder="/path/to/data or https://example.com">
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Chunk Size:</label>
+                            <input type="number" id="chunk-size" value="1024" min="128" max="4096">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Chunk Overlap:</label>
+                            <input type="number" id="chunk-overlap" value="200" min="0" max="1024">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Chunking Strategy:</label>
+                        <select id="chunking-strategy">
+                            <option value="fixed">Fixed Size</option>
+                            <option value="sentence">Sentence Based</option>
+                            <option value="semantic">Semantic</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Output Directory (optional):</label>
+                        <input type="text" id="ingest-output" placeholder="/tmp/index">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="ingestData()">Ingest Data</button>
+                    
+                    <div class="loading" id="ingest-loading">
+                        <div class="spinner"></div>
+                        <p>Ingesting data...</p>
+                    </div>
+                    
+                    <div id="ingest-result" class="result-box"></div>
+                </div>
+                
+                <!-- Query Engine Section -->
+                <div id="query-section" class="agent-section">
+                    <h2 class="section-title">Query Engine Agent</h2>
+                    
+                    <div class="form-group">
+                        <label>Index Path:</label>
+                        <input type="text" id="query-index-path" placeholder="/path/to/index">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Query:</label>
+                        <textarea id="query-text" placeholder="Enter your question..."></textarea>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Query Mode:</label>
+                            <select id="query-mode">
+                                <option value="similarity">Similarity</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="sub-question">Sub-Question</option>
+                                <option value="fusion">Fusion</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Top K Results:</label>
+                            <input type="number" id="query-top-k" value="3" min="1" max="50">
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="queryIndex()">Execute Query</button>
+                    
+                    <div class="loading" id="query-loading">
+                        <div class="spinner"></div>
+                        <p>Processing query...</p>
+                    </div>
+                    
+                    <div id="query-result" class="result-box"></div>
+                </div>
+                
+                <!-- RAG Pipeline Section -->
+                <div id="pipeline-section" class="agent-section">
+                    <h2 class="section-title">RAG Pipeline Agent</h2>
+                    
+                    <div class="card">
+                        <h4>Build Pipeline</h4>
+                        
+                        <div class="form-group">
+                            <label>Data Directory:</label>
+                            <input type="text" id="pipeline-data-dir" placeholder="/path/to/data">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Output Directory:</label>
+                            <input type="text" id="pipeline-output-dir" placeholder="/tmp/pipeline">
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="buildPipeline()">Build Pipeline</button>
+                    </div>
+                    
+                    <div class="loading" id="pipeline-loading">
+                        <div class="spinner"></div>
+                        <p>Building pipeline...</p>
+                    </div>
+                    
+                    <div id="pipeline-result" class="result-box"></div>
+                </div>
+                
+                <!-- Indexing Section -->
+                <div id="indexing-section" class="agent-section">
+                    <h2 class="section-title">Indexing Agent</h2>
+                    
+                    <div class="form-group">
+                        <label>Data Directory:</label>
+                        <input type="text" id="index-data-dir" placeholder="/path/to/data">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Index Type:</label>
+                        <select id="index-type">
+                            <option value="vector">Vector Store</option>
+                            <option value="tree">Tree</option>
+                            <option value="keyword">Keyword</option>
+                            <option value="list">List</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Output Directory:</label>
+                        <input type="text" id="index-output-dir" placeholder="/tmp/index">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="createIndex()">Create Index</button>
+                    <button class="btn btn-secondary" onclick="recommendIndex()">Get Recommendation</button>
+                    
+                    <div class="loading" id="index-loading">
+                        <div class="spinner"></div>
+                        <p>Creating index...</p>
+                    </div>
+                    
+                    <div id="index-result" class="result-box"></div>
+                </div>
+                
+                <!-- Evaluation Section -->
+                <div id="evaluation-section" class="agent-section">
+                    <h2 class="section-title">Evaluation Agent</h2>
+                    
+                    <div class="form-group">
+                        <label>Pipeline Path:</label>
+                        <input type="text" id="eval-pipeline-path" placeholder="/path/to/pipeline">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Test Queries (JSON format):</label>
+                        <textarea id="eval-queries" placeholder='[{"query": "What is RAG?"}, {"query": "How does it work?"}]'></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Metrics:</label>
+                        <select id="eval-metrics" multiple size="3">
+                            <option value="faithfulness" selected>Faithfulness</option>
+                            <option value="relevance" selected>Relevance</option>
+                            <option value="coherence">Coherence</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="evaluatePipeline()">Evaluate</button>
+                    
+                    <div class="loading" id="eval-loading">
+                        <div class="spinner"></div>
+                        <p>Running evaluation...</p>
+                    </div>
+                    
+                    <div id="eval-result" class="result-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        // Switch between agent sections
+        document.querySelectorAll('.agent-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.agent-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding section
+                const agent = this.dataset.agent;
+                document.querySelectorAll('.agent-section').forEach(s => s.classList.remove('active'));
+                document.getElementById(`${agent}-section`).classList.add('active');
+            });
+        });
+        
+        // Helper functions
+        function showLoading(id) {
+            document.getElementById(`${id}-loading`).classList.add('show');
+            document.getElementById(`${id}-result`).classList.remove('show');
+        }
+        
+        function hideLoading(id) {
+            document.getElementById(`${id}-loading`).classList.remove('show');
+        }
+        
+        function showResult(id, data, isError = false) {
+            const resultBox = document.getElementById(`${id}-result`);
+            resultBox.classList.add('show');
+            resultBox.classList.toggle('error', isError);
+            resultBox.classList.toggle('success', !isError);
+            resultBox.innerHTML = `
+                <h4>${isError ? 'Error' : 'Success'}</h4>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+        
+        // API Functions
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                showResult('health', data, !response.ok);
+                
+                // Update status badge
+                const badge = document.getElementById('apiStatus');
+                if (response.ok) {
+                    badge.className = 'status-badge online';
+                    badge.textContent = '● Online';
+                } else {
+                    badge.className = 'status-badge offline';
+                    badge.textContent = '● Offline';
+                }
+            } catch (error) {
+                showResult('health', { error: error.message }, true);
+                document.getElementById('apiStatus').className = 'status-badge offline';
+                document.getElementById('apiStatus').textContent = '● Offline';
+            }
+        }
+        
+        async function ingestData() {
+            showLoading('ingest');
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/ingest`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        source_type: document.getElementById('ingest-type').value,
+                        source_path: document.getElementById('ingest-path').value,
+                        chunk_size: parseInt(document.getElementById('chunk-size').value),
+                        chunk_overlap: parseInt(document.getElementById('chunk-overlap').value),
+                        chunking_strategy: document.getElementById('chunking-strategy').value,
+                        output_dir: document.getElementById('ingest-output').value || null
+                    })
+                });
+                const data = await response.json();
+                hideLoading('ingest');
+                showResult('ingest', data, !response.ok);
+            } catch (error) {
+                hideLoading('ingest');
+                showResult('ingest', { error: error.message }, true);
+            }
+        }
+        
+        async function queryIndex() {
+            showLoading('query');
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/query`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        query: document.getElementById('query-text').value,
+                        index_path: document.getElementById('query-index-path').value,
+                        mode: document.getElementById('query-mode').value,
+                        top_k: parseInt(document.getElementById('query-top-k').value),
+                        stream: false
+                    })
+                });
+                const data = await response.json();
+                hideLoading('query');
+                showResult('query', data, !response.ok);
+            } catch (error) {
+                hideLoading('query');
+                showResult('query', { error: error.message }, true);
+            }
+        }
+        
+        async function buildPipeline() {
+            showLoading('pipeline');
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/pipeline/build`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        data_dir: document.getElementById('pipeline-data-dir').value,
+                        output_dir: document.getElementById('pipeline-output-dir').value
+                    })
+                });
+                const data = await response.json();
+                hideLoading('pipeline');
+                showResult('pipeline', data, !response.ok);
+            } catch (error) {
+                hideLoading('pipeline');
+                showResult('pipeline', { error: error.message }, true);
+            }
+        }
+        
+        async function createIndex() {
+            showLoading('index');
+            try {
+                const response = await fetch(`${API_BASE}/api/v1/index/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        data_dir: document.getElementById('index-data-dir').value,
+                        index_type: document.getElementById('index-type').value,
+                        output_dir: document.getElementById('index-output-dir').value
+                    })
+                });
+                const data = await response.json();
+                hideLoading('index');
+                showResult('index', data, !response.ok);
+            } catch (error) {
+                hideLoading('index');
+                showResult('index', { error: error.message }, true);
+            }
+        }
+        
+        async function recommendIndex() {
+            showLoading('index');
+            try {
+                const dataDir = document.getElementById('index-data-dir').value;
+                const response = await fetch(`${API_BASE}/api/v1/index/recommend?data_dir=${encodeURIComponent(dataDir)}`);
+                const data = await response.json();
+                hideLoading('index');
+                showResult('index', data, !response.ok);
+            } catch (error) {
+                hideLoading('index');
+                showResult('index', { error: error.message }, true);
+            }
+        }
+        
+        async function evaluatePipeline() {
+            showLoading('eval');
+            try {
+                const queries = JSON.parse(document.getElementById('eval-queries').value);
+                const metrics = Array.from(document.getElementById('eval-metrics').selectedOptions).map(o => o.value);
+                
+                const response = await fetch(`${API_BASE}/api/v1/evaluate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        pipeline_path: document.getElementById('eval-pipeline-path').value,
+                        test_queries: queries,
+                        metrics: metrics
+                    })
+                });
+                const data = await response.json();
+                hideLoading('eval');
+                showResult('eval', data, !response.ok);
+            } catch (error) {
+                hideLoading('eval');
+                showResult('eval', { error: error.message }, true);
+            }
+        }
+        
+        // Check health on page load
+        window.addEventListener('load', checkHealth);
+    </script>
+</body>
+</html>
