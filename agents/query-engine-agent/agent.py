@@ -38,8 +38,19 @@ class QueryEngineAgent:
             retriever = VectorIndexRetriever(index=self.index, similarity_top_k=cfg.top_k)
             query_engine = RetrieverQueryEngine(retriever=retriever)
         elif cfg.mode == "sub-question":
+            from llama_index.core.tools import QueryEngineTool, ToolMetadata
+            
+            # Wrap query engine in QueryEngineTool for SubQuestionQueryEngine
+            base_query_engine = self.index.as_query_engine(similarity_top_k=cfg.top_k)
+            query_engine_tool = QueryEngineTool(
+                query_engine=base_query_engine,
+                metadata=ToolMetadata(
+                    name="base_query_engine",
+                    description="Query engine for the indexed documents"
+                )
+            )
             query_engine = SubQuestionQueryEngine.from_defaults(
-                query_engine_tools=[self.index.as_query_engine()]
+                query_engine_tools=[query_engine_tool]
             )
         else:
             query_engine = self.index.as_query_engine(similarity_top_k=cfg.top_k)

@@ -46,19 +46,19 @@ cp .env.example .env
 
 ```bash
 # Process a single PDF
-python main.py --mode pdf --path document.pdf
+python main.py pdf --path document.pdf
 
 # Process entire directory
-python main.py --mode directory --path ./docs --recursive
+python main.py directory --path ./docs --recursive
 
 # Scrape web content
-python main.py --mode web --url https://example.com --depth 2
+python main.py web --url https://example.com --depth 2
 
 # Process with custom chunking
-python main.py --mode pdf --path doc.pdf --chunk-size 512 --chunk-overlap 50
+python main.py pdf --path doc.pdf --chunk-size 512 --chunk-overlap 50
 
 # Save to specific index
-python main.py --mode directory --path ./docs --output-dir ./index --index-name my_docs
+python main.py directory --path ./docs --output-dir ./index --index-name my_docs
 ```
 
 ## Usage Examples

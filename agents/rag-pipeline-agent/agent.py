@@ -18,10 +18,13 @@ class RAGPipelineAgent:
         # Create index
         index = VectorStoreIndex.from_documents(documents)
         
-        # Create query engine
+        # Create query engine with nested config values
+        retrieval_config = config.get('retrieval', {})
+        generation_config = config.get('generation', {})
+        
         query_engine = index.as_query_engine(
-            similarity_top_k=config.get('top_k', 3),
-            response_mode=config.get('response_mode', 'compact')
+            similarity_top_k=retrieval_config.get('top_k', 3),
+            response_mode=generation_config.get('response_mode', 'compact')
         )
         
         return {
@@ -120,7 +123,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
-CMD ["python", "serve.py"]
+# Note: Add your server implementation (e.g., FastAPI app) here
+# CMD ["python", "your_server.py"]
+CMD ["echo", "Add server implementation to run the pipeline"]
 """
         with open(Path(output_dir) / 'Dockerfile', 'w') as f:
             f.write(dockerfile)

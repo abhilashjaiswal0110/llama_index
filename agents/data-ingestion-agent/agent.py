@@ -167,11 +167,20 @@ class DataIngestionAgent:
         logger.info(f"Ingesting directory: {directory_path}")
         
         try:
+            # Normalize extensions to match Path.suffix format (e.g., ".pdf")
+            normalized_exts = None
+            if extensions:
+                normalized_exts = [
+                    ext if isinstance(ext, str) and ext.startswith(".") else f".{ext}"
+                    for ext in extensions
+                ]
+            
             reader = SimpleDirectoryReader(
                 input_dir=directory_path,
                 recursive=recursive,
-                required_exts=extensions,
-                exclude_hidden=True
+                required_exts=normalized_exts,
+                exclude_hidden=True,
+                exclude=exclude_patterns
             )
             
             documents = reader.load_data(show_progress=self.config.show_progress)
@@ -340,8 +349,13 @@ class DataIngestionAgent:
         try:
             from llama_index.readers.database import DatabaseReader
             
-            reader = DatabaseReader(connection)
-            documents = reader.load_data(query=query)
+            reader = DatabaseReader(uri=connection)
+            load_kwargs: Dict[str, Any] = {}
+            if text_columns:
+                load_kwargs["text_columns"] = text_columns
+            if metadata_columns:
+                load_kwargs["metadata_columns"] = metadata_columns
+            documents = reader.load_data(query=query, **load_kwargs)
             
             # Process documents
             documents = self._process_documents(documents)

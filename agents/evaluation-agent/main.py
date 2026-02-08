@@ -86,12 +86,18 @@ def compare(pipeline_a, pipeline_b, test_set):
     table.add_column("Improvement", style="green")
     
     for metric, values in comparison.items():
-        improvement = ((values['b'] - values['a']) / values['a']) * 100
+        a = values['a']
+        b = values['b']
+        if a == 0:
+            improvement_str = "N/A"
+        else:
+            improvement = ((b - a) / a) * 100
+            improvement_str = f"{improvement:+.1f}%"
         table.add_row(
             metric,
-            f"{values['a']:.3f}",
-            f"{values['b']:.3f}",
-            f"{improvement:+.1f}%"
+            f"{a:.3f}",
+            f"{b:.3f}",
+            improvement_str
         )
     
     console.print(table)
